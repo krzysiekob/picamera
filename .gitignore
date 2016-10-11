@@ -1,6 +1,6 @@
 *.py[co]
 **~
-#logs/*
-#static/photo/*
+logs/*
+static/photo/*
 static/test.jpg
 lib/settings.lite
