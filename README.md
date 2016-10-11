@@ -1,4 +1,4 @@
-# picamera
+# ReefNet
 
 1.
 apt-get install build-essential python-dev python-setuptools
