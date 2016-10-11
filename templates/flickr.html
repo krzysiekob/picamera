@@ -1,0 +1,106 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Flickr - Ustawienia galerii{% endblock %}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+
+{% if (checkToken) %}
+    <div class="alert alert-success">
+	<strong>Success!</strong> Połączenie z Flickr jest Ok
+    </div>
+{% else %}
+    <div class="alert alert-danger">
+	<strong>Uwaga!</strong> Brak połączenia z Flickr
+    </div>
+{% endif%}
+    
+    <h1>Flickr - Ustawienia galerii</h1>
+    <div class="jumbotron">
+	<form method="POST">
+	    <!--<div class="form-group">
+		<label for="title">tytuł</label>
+		<input name="title" class="form-control" placeholder="title" value="{{form.title}}">
+	    </div>
+	    <div class="form-group">
+		<label for="description">opis</label>
+		<input name="description" class="form-control" placeholder="description" value="{{form.description}}">
+	    </div>
+	    <div class="form-group">
+		<label for="tags">tagi</label>
+		<input name="tags" class="form-control" placeholder="tags" value="{{form.tags}}">
+	    </div>-->
+	    <div class="form-group">
+		<label for="is_power">Czy włączyć upload na Flickr?</label>
+		<select name="is_power" class="form-control">
+		  {% for v in ['1','0'] %}
+		    <option value="{{v}}" {% if form.is_power == v %} selected="yes" {% endif %}>{% if v == '1' %} Tak {% else %} Nie {% endif %}</option>
+		  {% endfor %}
+		</select>
+	    </div>
+	    <div class="form-group">
+		<label for="album_format">Format albumu</label>
+		<select name="album_format" class="form-control">
+		  {% for v in ['%Y-%m-%d','%Y-%m','%Y'] %}
+		    <option value="{{v}}" {% if form.album_format == v %} selected="yes" {% endif %}>{{ v }}</option>
+		  {% endfor %}
+		</select>
+	    </div>	    
+	    
+	    <div class="form-group">
+		<div class="row">
+		    <div class="col-lg-4">
+			<label for="is_public">publiczny</label>	
+			<select name="is_public" class="form-control">
+ 			  {% for v in ['1','0'] %}
+			    <option value="{{v}}" {% if form.is_public == v %} selected="yes" {% endif %}>{% if v == '1' %} Tak {% else %} Nie {% endif %}</option>
+			  {% endfor %}
+			</select>
+		    </div>
+		    <div class="col-lg-4">
+			<label for="is_friend">dla przyjaciół</label>	
+			<select name="is_friend" class="form-control">
+ 			  {% for v in ['1','0'] %}
+			    <option value="{{v}}" {% if form.is_friend == v %} selected="yes" {% endif %}>{% if v == '1' %} Tak {% else %} Nie {% endif %}</option>
+			  {% endfor %}
+			</select>
+		    </div>
+		    <div class="col-lg-4">
+			<label for="is_family">dla rodziny</label>	
+			<select name="is_family" class="form-control">
+ 			  {% for v in ['1','0'] %}
+			    <option value="{{v}}" {% if form.is_family == v %} selected="yes" {% endif %}>{% if v == '1' %} Tak {% else %} Nie {% endif %}</option>
+			  {% endfor %}
+			</select>
+		    </div>		    
+		    <div class="col-lg-4">
+			<label for="is_private">prywatny</label>	
+			<select name="is_private" class="form-control">
+ 			  {% for v in ['1','0'] %}
+			    <option value="{{v}}" {% if form.is_private == v %} selected="yes" {% endif %}>{% if v == '1' %} Tak {% else %} Nie {% endif %}</option>
+			  {% endfor %}
+			</select>
+		    </div>		    
+		</div>
+	    </div>	    	    
+	    
+
+	    <button type="submit" class="btn btn-lg btn-danger">Zapisz</button>
+	</form>
+	
+
+    </div>
+    
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+<script src="{{url_for('static', filename='info_system.js')}}"></script>
+{% endblock %}

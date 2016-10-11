@@ -1,0 +1,66 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Flickr{% endblock %}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+
+{% if (checkToken) %}
+    <div class="alert alert-success">
+	<strong>Success!</strong> Połączenie z Flickr jest Ok
+    </div>
+{% else %}
+    <div class="alert alert-danger">
+	<strong>Uwaga!</strong> Brak połączenia z Flickr
+    </div>
+{% endif%}
+    
+    {% if (back.frob == '') %}
+      <h1>Flickr - Ustawienia API krok 1/2</h1>
+      <div class="jumbotron">
+	<h3 class="help-block"><a href="http://www.flickr.com/services/apps/create/apply" target="_blank">Potrzebujesz api_key i secret, kliknij by przejść do Flickr</a></h3>
+	<form method="POST">	  
+	  <div class="form-group">
+	    <label for="api_key">api_key</label>
+	    <input type="hidden" name="token" class="form-control" value="">
+	    <input type="hidden" name="frob" class="form-control" value="">
+	    <input name="api_key" class="form-control" placeholder="api_key" value="{{form.api_key}}" required>
+	  </div>
+	  <div class="form-group">
+	    <label for="secret">secret</label>
+	    <input name="secret" class="form-control" placeholder="secret" value="{{form.secret}}" required>
+	  </div>	    	    
+	  <button type="submit" class="btn btn-lg btn-danger">Połacz z Flickr</button>
+	</form>
+      {% elif back.url != '' %}
+      <h1>Flickr - Ustawienia API krok 2/2</h1>
+      <div class="jumbotron">
+	<form method="POST">
+	  <input type="hidden" name="frob" class="form-control" value="{{back.frob}}">
+
+	  <div class="form-group">
+	      <a href="{{ back.url }}" target="_blank" class="btn btn-lg btn-danger" role="button">A. Kliknij w link, zaloguj się do Flickr i potwierdź autoryzację</a>
+	  </div>
+	  <div class="form-group">
+	      <button type="submit" class="btn btn-lg btn-danger">B. Po zatwierdzeniu autoryzacji na stronie Flickr kliknij tu by kontynuować</button>
+	  </div>
+
+	  
+	</form>
+      {% endif %}
+
+    </div>
+    
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+<script src="{{url_for('static', filename='info_system.js')}}"></script>
+{% endblock %}

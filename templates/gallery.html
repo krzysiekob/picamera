@@ -1,0 +1,42 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Galeria{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link href="{{url_for('static', filename='gallery.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+<script src="{{url_for('static', filename='gallery.js')}}"></script>
+<script src="{{url_for('static', filename='info_system.js')}}"></script>
+{% endblock %}
+
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+    <h1>Galeria <a href="{{url_for('bp_gallery.clear')}}" class="btn btn-danger" role="button" onclick="return confirm('Usunąć wszystkie zdjęcia?');">Usuń wszystkie zdjęcia</a></h1>    
+    {{pagination.info}}
+    <div class="row">
+	{% for file in files %}
+	  <div class="col-lg-3 col-md-6">    
+	    <a href="/{{file}}">
+	      <img src="/{{file.replace('/photo/','/photo/thumb/')}}" width="350" />
+	    </a>
+	    <b>{{file}}</b>
+	  </div>
+      {% endfor %}
+    </div>
+
+    {{pagination.links}}
+
+	
+</div>
+
+{% endblock %}

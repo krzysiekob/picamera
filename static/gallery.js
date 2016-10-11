@@ -1,0 +1,2 @@
+$(".pagination ul").addClass("pagination");
+

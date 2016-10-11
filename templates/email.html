@@ -1,0 +1,135 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Email{% endblock %}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="container">
+
+    {% if (check_connect) %}
+      <div class="alert alert-success">
+	<strong>Success!</strong> Połączenie z serwerem Gmail OK
+      </div>
+    {% else %}
+      <div class="alert alert-danger">
+	<strong>Uwaga!</strong> Brak połączenia z serwerem Gmail. Sprawdź email i hasło.
+      </div>
+    {% endif %}
+    
+    <h1>Ustawienia email</h1>
+    <div class="jumbotron">
+      <form method="POST">
+
+	<div class="form-group">
+	  <label for="gmail_user">Email</label>
+	  <input name="gmail_user" class="form-control" placeholder="Email" value="{{form.gmail_user}}">
+	  <small class="help-block">Adres email z którego będą odbierane maile</small>
+	</div>
+	<div class="form-group">
+	  <label for="gmail_pwd">Hasło</label>
+	  <input type="password" class="form-control" name="gmail_pwd" placeholder="Password" value="{{form.gmail_pwd}}">
+	  <small class="help-block">Hasło do email z którego będą odbierane emaile</small>
+	</div>
+	<div class="form-group">
+	  <label for="gmail_imap">Adres serwera imap, poczta przychodząca</label>
+	  <input type="text" class="form-control" name="gmail_imap" placeholder="imap" value="{{form.gmail_imap}}">
+	</div>
+	<div class="form-group">
+	  <label for="gmail_smtp">Adres serwera smtp, poczta wychodząca</label>
+	  <input type="text" class="form-control" name="gmail_smtp" placeholder="smtp" value="{{form.gmail_smtp}}">
+	</div>
+	<div class="form-group">
+	  <label for="gmail_smtp_port">Port serwera smtp, poczta wychodząca</label>
+	  <input type="number" class="form-control" name="gmail_smtp_port" placeholder="smtp_port" value="{{form.gmail_smtp_port}}">
+	</div>
+	<div class="form-group">
+	  <label for="gmail_smtp_max_size">Maksymalna pojemność emaila wychodzącego</label>
+	  <input type="number" class="form-control" name="gmail_smtp_max_size" placeholder="smtp_max_size" value="{{form.gmail_smtp_max_size}}">
+	  <small class="help-block">Wartość w bajtach, gmail akceptuje 25 MB</small>
+	</div>
+	<div class="form-group">
+	  <label for="email_smtp_accept">Adresy email nadawców, które akceptuje</label>
+	  <input type="text" class="form-control" name="email_smtp_accept" placeholder="smtp_accept" value="{{form.email_smtp_accept}}">
+	  <small class="help-block">Maile podawać po przecinkach. Uwaga! Jeżeli zaznaczone pole TAK w "Akceptuje wszystich nadawców", to te pole będzie ignorowane</small>
+	</div>
+
+	<div class="form-group">
+	  <label for="email_smtp_accept_all">Czy akceptować wszystkich nadawców</label>
+	  <select name="email_smtp_accept_all">
+	    <option value="False" {% if form.email_smtp_accept_all == "False" %} selected {% endif %}>NIE</option>
+	    <option value="True" {% if form.email_smtp_accept_all == "True" %} selected {% endif %}>TAK</option>
+	  </select>
+	</div>
+	
+	<div class="form-group">
+	  <label for="email_subject">Temat maila, po otrzymaniu którego będą wysyłane zdjęcia</label>
+	  <input type="text" class="form-control" name="email_subject" placeholder="email_subject" value="{{form.email_subject}}">
+	  <small class="help-block">
+	  <ul>
+	    <li>{{form.email_subject}} - domyślna ilość zdjęć, czyli {{form.email_subject}},{{form.photo_default_length}},{{form.photo_default_offset}} </li>
+	    <li>{{form.email_subject}},1,1 - wysyła najnowsza fotkę </li>
+	    <li>{{form.email_subject}},4,6 - wysyła 4 fotki, co szóstą, czyli mamy po jednnym zdjęciu na godzinę </li>
+	    <li>{{form.email_subject}},15,2 - wysyła 15 fotek, co drugą </li>
+	  </ul>
+	  </small>
+	</div>
+	<div class="form-group">
+	  <label for="photo_default_length">Domyślna ilość zdjęć </label>
+	  <input type="number" class="form-control" name="photo_default_length" placeholder="photo_default_length" value="{{form.photo_default_length}}">
+	  <small class="help-block">Wysyłając email bez parametrów dostaniesz ilość zdjęć, którą zdefiniujesz w tym polu</small>
+	</div>
+	<div class="form-group">
+	  <label for="photo_default_offset">Domyślna ilość zdjęć pomijana</label>
+	  <input type="number" class="form-control" name="photo_default_offset" placeholder="photo_default_offset" value="{{form.photo_default_offset}}">
+	  <small class="help-block">Wysyłając email bez parametrów ilość zdjęć do pominięcia</small>
+	</div>
+	<div class="form-group">
+	  <label for="start_photo">Start automat photo (HH:MM)</label>
+	  <input type="time" name="start_photo" class="form-control" placeholder="start_photo" value="{{form.start_photo}}">
+	  <small class="help-block">Tu można podać godzinę, o której zacząć robić zdjęcia</small>
+	</div>
+	<div class="form-group">
+	  <label for="stop_photo">Stop automat photo (HH:MM)</label>
+	  <input type="time" name="stop_photo" class="form-control" placeholder="stop_photo" value="{{form.stop_photo}}">
+	  <small class="help-block">W nocy zdjęć nie robimy, więc tu trzeba podać godzinę zakończenia</small>
+	</div>
+	<div class="form-group">
+	    <label for="step_photo">Co ile minut robić zdjęcia</label>
+	    <select name="step_photo">
+		<option value="1" {% if form.step_photo == "1" %} selected {% endif %}>1 minuta</option>
+		<option value="2" {% if form.step_photo == "2" %} selected {% endif %}>2 minuty</option>
+		<option value="5" {% if form.step_photo == "5" %} selected {% endif %}>5 minut</option>
+		<option value="10" {% if form.step_photo == "10" %} selected {% endif %}>10 minut</option>
+		<option value="30" {% if form.step_photo == "30" %} selected {% endif %}>30 minut</option>
+		<option value="60" {% if form.step_photo == "60" %} selected {% endif %}>60 minut</option>
+	    </select>
+	    <small class="help-block">Uwaga: zdjęcia nadpisują się każdego dnia. Trzeba też uważać żeby nie zabrakło miejsca na dysku</small>
+	</div>
+	<div class="form-group">
+	    <label for="height_photo">Temat email dla streaming VLC i YouTube</label>
+	    <input type="text" name="email_subject_streaming" class="form-control" placeholder="Temat email streaming" value="{{form.email_subject_streaming}}">
+	    <small class="help-block">np: {{form.email_subject_streaming}},yt,start - startuje transmisje dla odtwarzacza YouTube</small>
+	    <small class="help-block">np: {{form.email_subject_streaming}},yt,stop - zatrzymuje transmisje dla odtwarzacza YouTube</small>
+	</div>
+
+	
+	
+	
+	<button type="submit" class="btn btn-lg btn-danger">Zapisz</button>
+      </form>
+	  
+
+    </div>
+    
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  <script src="{{url_for('static', filename='info_system.js')}}"></script>
+{% endblock %}

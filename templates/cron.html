@@ -1,0 +1,189 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Cron{% endblock %}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+    <h1>Ustawienia cron</h1>
+    Cron dzienny, można ustawić automatyczne wysyłanie zdjęć, można ustawić automatycznie włączanie i wyłączanie streamingu YouTube
+    <div class="jumbotron">
+      <form method="POST">
+	    
+	<div class="form-group">
+	  <label for="email">Email</label>
+	  <input name="email" class="form-control" placeholder="Email" value="{{form.email}}">
+	  <small class="help-block">Adres email na który będą przychodzić zdjęcia i komunikaty crona</small>
+	</div>
+	
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time1">Time: format HH:MM</label>
+	    <input type="time" name="time1" class="form-control" placeholder="time1" value="{{form.time1}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject1" class="form-control" placeholder="subject1" value="{{form.subject1}}">
+	  </div>
+	</div>
+	
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time2">Time: format HH:MM</label>
+	    <input type="time" name="time2" class="form-control" placeholder="time2" value="{{form.time2}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject2">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject2" class="form-control" placeholder="subject2" value="{{form.subject2}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time3">Time: format HH:MM</label>
+	    <input type="time" name="time3" class="form-control" placeholder="time3" value="{{form.time3}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject3">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject3" class="form-control" placeholder="subject3" value="{{form.subject3}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time4">Time: format HH:MM</label>
+	    <input type="time" name="time4" class="form-control" placeholder="time4" value="{{form.time4}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject4">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject4" class="form-control" placeholder="subject4" value="{{form.subject4}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time5">Time: format HH:MM</label>
+	    <input type="time" name="time5" class="form-control" placeholder="time5" value="{{form.time5}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject5">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject5" class="form-control" placeholder="subject5" value="{{form.subject5}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time6">Time: format HH:MM</label>
+	    <input type="time" name="time6" class="form-control" placeholder="time6" value="{{form.time6}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject6">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject6" class="form-control" placeholder="subject6" value="{{form.subject6}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time7">Time: format HH:MM</label>
+	    <input type="time" name="time7" class="form-control" placeholder="time7" value="{{form.time7}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject7">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject7" class="form-control" placeholder="subject7" value="{{form.subject7}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time8">Time: format HH:MM</label>
+	    <input type="time" name="time8" class="form-control" placeholder="time8" value="{{form.time8}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subjec8">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject8" class="form-control" placeholder="subject8" value="{{form.subject8}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time9">Time: format HH:MM</label>
+	    <input type="time" name="time9" class="form-control" placeholder="time9" value="{{form.time9}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject9">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject9" class="form-control" placeholder="subject9" value="{{form.subject9}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time10">Time: format HH:MM</label>
+	    <input type="time" name="time10" class="form-control" placeholder="time10" value="{{form.time10}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject10">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject10" class="form-control" placeholder="subject10" value="{{form.subject10}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time11">Time: format HH:MM</label>
+	    <input type="time" name="time11" class="form-control" placeholder="time11" value="{{form.time11}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject11">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject11" class="form-control" placeholder="subject11" value="{{form.subject11}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time12">Time: format HH:MM</label>
+	    <input type="time" name="time12" class="form-control" placeholder="time12" value="{{form.time12}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject12">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject12" class="form-control" placeholder="subject12" value="{{form.subject12}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time13">Time: format HH:MM</label>
+	    <input type="time" name="time13" class="form-control" placeholder="time13" value="{{form.time13}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject13" class="form-control" placeholder="subject13" value="{{form.subject13}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time14">Time: format HH:MM</label>
+	    <input type="time" name="time14" class="form-control" placeholder="time14" value="{{form.time14}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject14">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject14" class="form-control" placeholder="subject14" value="{{form.subject14}}">
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	    <label for="time15">Time: format HH:MM</label>
+	    <input type="time" name="time15" class="form-control" placeholder="time15" value="{{form.time15}}">
+	  </div>
+	  <div class="col-xs-6">
+	    <label for="subject15">Tytuł: np: {{settings_email.email_subject}},1,1 </label>
+	    <input type="text" name="subject15" class="form-control" placeholder="subject15" value="{{form.subject15}}">
+	  </div>
+	</div>
+
+	
+	<button type="submit" class="btn btn-lg btn-danger">Zapisz</button>
+      </form>
+      
+
+    </div>
+    
+  </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+  {{super()}}
+  <script src="{{url_for('static', filename='info_system.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Index{% endblock %}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+	
+	<div class="col-lg-6">
+	    <div class="panel panel-default">
+		<div class="panel-heading">
+	      Informacje o dysku, całkowita pojemność {{disk[0]}}
+		</div>
+		<div class="panel-body">
+		    <div id="placeholder" style="height:250px;width:450px;"></div>
+		</div>
+            </div>
+	</div>	
+    </div>    
+
+    	
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+  {{super()}}
+  <script src="{{url_for('static', filename='jquery.flot.min.js')}}"></script>
+  <script src="{{url_for('static', filename='jquery.flot.pie.min.js')}}"></script>
+  <script src="{{url_for('static', filename='jquery.minicolors.min.js')}}"></script>
+  <script type="text/javascript">
+    var data = [
+    { label: "Użyte - {{disk[1]}}",  data: {{disk[1]}}},
+    { label: "Wolne - {{disk[2]}}",  data: {{disk[2]}}}
+    ];
+    var placeholder = $("#placeholder");
+    $.plot(placeholder, data, {
+    series: {
+    pie: { 
+    show: true
+    }
+    }
+    });
+  </script>
+
+    <script>
+      $(document).ready( function() {
+      $('#annotate_background').minicolors();
+      });
+    </script>  
+<script src="{{url_for('static', filename='info_system.js')}}"></script>
+{% endblock %}

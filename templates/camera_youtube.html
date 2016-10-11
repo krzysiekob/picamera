@@ -1,0 +1,48 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}YouTube{% endblock %}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  <script src="{{url_for('static', filename='camera.js')}}"></script>
+  <script src="{{url_for('static', filename='info_system.js')}}"></script>
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="container">
+    <h1>Konfiguracja YouTube</h1>
+    <button type="submit" class="btn btn-lg btn-success stream" data-id="start" data-sh="yt" id="yt-start">Włącz transmisję YouTube
+      <span class="glyphicon-align-left glyphicon glyphicon-play" aria-hidden="true"></span>
+    </button>
+    <button type="submit" class="btn btn-lg btn-danger stream" data-id="stop" data-sh="yt" id="yt-stop">Wyłącz transmisję YouTube
+      <span class="glyphicon-align-left glyphicon glyphicon-stop" aria-hidden="true"></span>
+    </button>
+
+    <div class="jumbotron">
+      <form method="POST">
+	<div class="form-group">
+	  <label for="title_start">URL serwera</label>
+	  <input type="text" id="YouTube_stream_url" name="youtube_stream_url" class="form-control" placeholder="Podaj url stream" value="{{form.youtube_stream_url}}">
+	</div>
+	<div class="form-group">
+	  <label for="title_start">Nazwa/klucz strumienia</label>
+	  <input type="text" id="YouTube_stream_id" name="youtube_stream_id" class="form-control" placeholder="Podaj klucz" value="{{form.youtube_stream_id}}">
+	</div>
+	<div class="form-group">
+	    <label for="url_live">Url do transmisji</label>
+	    <input type="text" name="url_live" class="form-control" placeholder="Url Live" value="{{form.url_live}}">
+	</div>
+	<button type="submit" class="btn btn-lg btn-warning">Zapisz ustawienia</button>	
+      </form>
+
+      
+    </div>
+    
+  </div>
+
+{% endblock %}

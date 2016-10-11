@@ -1,0 +1,35 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Logi{% endblock %}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+  <h1>Logi</h1>
+  <div class="row">
+    <div class="col-lg-2">
+      <ul>
+      {% for log in logfiles %}
+	<li><a href="{{url_for('bp_logs.edit', file_name=log)}}">{{log}}</a></li>
+      {% endfor %}
+      </ul>
+    </div>
+    <div class="col-xs-10">
+      <textarea style="width:90%;height:1000px">
+	{{data}}
+      </textarea>
+    </div>
+  </div>
+  
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+<script src="{{url_for('static', filename='info_system.js')}}"></script>
+{% endblock %}

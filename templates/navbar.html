@@ -1,0 +1,68 @@
+{% block navbar %}
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{url_for('bp_home.index')}}">PI Camera</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+	    <li><a href="{{url_for('bp_home.edit')}}">Ustawienia zdjęć</a></li>
+            <li><a href="{{url_for('bp_email.edit')}}">Ustawienia email</a></li>
+	    <li><a href="{{url_for('bp_camera.edit', name='youtube')}}">Transmisja YouTube</a></li>
+	    <li><a href="{{url_for('bp_gallery.edit')}}">Galeria</a></li>
+	    <li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Flickr<span class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu">
+		    <li><a href="{{url_for('bp_flickr.edit')}}">Ustawienia galerii</a></li>
+		    <li><a href="{{url_for('bp_flickr.api')}}">Ustawienia API</a></li>
+		</ul>
+	    </li>	    
+	    <li><a href="{{url_for('bp_cron.edit')}}">Cron</a></li>
+	    <li><a href="{{url_for('bp_logs.edit')}}">Logi</a></li>
+        </ul>
+	
+	{% if current_user.id %}
+	<ul class="nav navbar-nav navbar-right">
+	    <li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><small id="info_system"></small>{{current_user.id}}<span class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu">
+		  <li><a href="{{url_for('bp_user.password')}}">Zmień hasło</a></li>
+		    <li><a href="{{url_for('bp_user.logout')}}">Wyloguj</a></li>
+		</ul>
+	    </li>
+	</ul>
+      {% endif %}
+
+
+      </div>
+    </div>
+  </nav>
+
+  <div id="message" class="alert alert-success" style="overflow-y: scroll; height:100px;width:100%;display:none"></div>
+  
+  {% if form_info == "OK"%}
+    <div class="container">
+      <div class="alert alert-success">
+	<a href="#" class="close" data-dismiss="alert">&times;</a>
+	Dane zostały zapisane
+      </div>
+    </div>
+  {% elif form_info == "ERROR" %}
+    <div class="container">
+      <div class="alert alert-success">
+	<a href="#" class="close" data-dismiss="alert">&times;</a>
+	Wystąpił błąd przy zapisie danych
+      </div>
+    </div>
+  {% endif %}
+
+
+  <!-- https://getbootstrap.com/examples/navbar/  -->  
+{% endblock %}
