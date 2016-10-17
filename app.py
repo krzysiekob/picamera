@@ -8,6 +8,7 @@ from flask import redirect
 from flask import url_for
 from bp_email import bp_email
 from bp_home import bp_home
+from bp_photo import bp_photo
 from bp_info_system import bp_info_system
 from bp_gallery import bp_gallery
 from bp_camera import bp_camera
@@ -40,6 +41,7 @@ login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 Bootstrap(app)
 app.register_blueprint(bp_home)
+app.register_blueprint(bp_photo)
 app.register_blueprint(bp_email)
 app.register_blueprint(bp_gallery)
 app.register_blueprint(bp_camera)

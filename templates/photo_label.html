@@ -1,0 +1,62 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="container">
+
+    <h1>
+    Ustawienia - Etykieta na zdjęciu
+    </h1>
+    <div class="jumbotron">
+	<div class="panel-body">
+	    <form method="POST">
+		
+		<div class="form-group">
+		    <div class="row">
+			<div class="col-lg-12">
+			    <label for="annotate_text">Text, <a href="http://picamera.readthedocs.io/en/release-1.12/api_camera.html#picamera.PiCamera.annotate_text" target="_blank">annotate_text</a></label>			
+			    <input type="text" name="photo_annotate_text" class="form-control" value="{{ form.photo_annotate_text}}">				
+			</div>
+		    </div>
+		    <div class="row">			
+			<div class="col-lg-6">
+			    <label for="annotate_size">Rozmiar czcionki, <a href="http://picamera.readthedocs.io/en/release-1.12/api_camera.html#picamera.PiCamera.annotate_size" target="_blank">annotate_size</a> [6-160]</label>	
+			    <input type="size" min="6" max="160" name="photo_annotate_size" class="form-control" value="{{ form.photo_annotate_size}}" required>								
+			</div>			    
+			<div class="col-lg-3">
+			    <label for="annotate_background">tło, <a href="http://picamera.readthedocs.io/en/release-1.12/api_camera.html#picamera.PiCamera.annotate_background" target="_blank">annotate_background</a></label>
+			    <input type="text" id="annotate_background" name="photo_annotate_background" class="form-control" data-control="hue" value="{{ form.photo_annotate_background}}" required>
+			</div>
+			<div class="col-lg-3">
+			    <label for="annotate_add_date">Dodać datę wykonania zdjęcia ?</label>	
+			    <select name="photo_annotate_add_date" class="form-control">
+ 				  {% for v in ['1','0'] %}
+				<option value="{{v}}" {% if form.photo_annotate_add_date == v %} selected="yes" {% endif %}>{% if v == '1' %} Tak {% else %} Nie {% endif %}</option>
+				  {% endfor %}
+			    </select>
+			</div>			    			    
+		    </div>
+		</div>
+		
+		
+		<button type="submit" class="btn btn-lg btn-danger">Zapisz</button>	
+	    </form>
+	</div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+  {{super()}}
+<script src="{{url_for('static', filename='info_system.js')}}"></script>
+{% endblock %}

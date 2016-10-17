@@ -14,7 +14,7 @@ l.setupDB()
 class Settings:
 
     def __init__(self):
-        self.db_path = '/home/pi/picamera/lib/settings.lite'
+        self.db_path = os.getcwd() + '/lib/settings.lite'
 
     def get(self, section_name):
         sql = 'select option, value from settings where name=?';

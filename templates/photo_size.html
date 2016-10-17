@@ -1,0 +1,73 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Home{% endblock %}
+
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="container">
+
+    <h1>Ustawienia - rozmiar/rotacja</h1>
+    <div class="jumbotron">
+	<div class="panel-body">
+	    <form method="POST">
+		<div class="form-group">
+		    <label for="">Rozmiar obrazka, <a href="http://picamera.readthedocs.io/en/release-1.12/api_camera.html#picamera.PiCamera.resolution" target="_blank">resolution</a></label>
+		    <select name="photo_resolution" class="form-control">
+			  {% for v in ['2592x1944', '1920x1080', '1280x720', '640x480', '320x240'] %}
+			<option value="{{ v }}" {% if form.photo_resolution == v %} selected="yes" {% endif %}>{{ v }}</option>
+			  {% endfor %}
+		    </select>
+		</div>		    
+
+		<div class="form-group">
+		    <label for="rotation">Rotacja, <a href="http://picamera.readthedocs.io/en/release-1.12/api_camera.html#picamera.PiCamera.rotation" target="_blank">rotation</a>, domyślnie 0</label>
+		    <select name="photo_rotation" class="form-control">
+			{% for v in ['0','90','180','270'] %}
+			<option value="{{v}}" {% if form.photo_rotation == v %} selected="yes" {% endif %}>{{v}}</option>
+			{% endfor %}
+		    </select>
+		</div>
+		
+
+		<div class="form-group">
+		    <label for="zoom">Zoom, <a href="http://picamera.readthedocs.io/en/release-1.12/api_camera.html#picamera.PiCamera.zoom" target="_blank">zoom</a> (x, y, w, h)</label>
+		    <div class="row">
+			<div class="col-lg-3">
+			    <label>x [0-1], domyślnie 0.0</label>
+			    <input type="number" min="0" max="1.0" step=".1" class="form-control" value="{{ form.photo_zoom_x }}" name="photo_zoom_x" required>
+			</div>
+			<div class="col-lg-3">
+			    <label>y [0-1], domyślnie 0.0</label>
+			    <input type="number" min="0" max="1.0" step=".1" class="form-control" value="{{ form.photo_zoom_y }}" name="photo_zoom_y" required>
+			</div>
+			<div class="col-lg-3">
+			    <label>w [0-1], domyślnie 1.0</label>
+			    <input type="number" min="0" max="1.0" step=".1" class="form-control" value="{{ form.photo_zoom_w }}" name="photo_zoom_w" required>
+			</div>
+			<div class="col-lg-3">
+			    <label>h [0-1], domyślnie 1.0</label>
+			    <input type="number" min="0" max="1.0" step=".1" class="form-control" value="{{ form.photo_zoom_h }}" name="photo_zoom_h" required>
+			</div>
+		    </div>
+		</div>
+		
+		<button type="submit" class="btn btn-lg btn-danger">Zapisz</button>	
+	    </form>
+	</div>
+    </div>
+    
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+  {{super()}}
+<script src="{{url_for('static', filename='info_system.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Email{% endblock %}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    
+    <h1>Ustawienia email - cron zdjęć</h1>
+    <div class="jumbotron">
+	<form method="POST">
+
+	    <div class="form-group">
+		<label for="start_photo">Start automat photo (HH:MM)</label>
+		<input type="time" name="start_photo" class="form-control" placeholder="start_photo" value="{{form.start_photo}}">
+		<small class="help-block">Tu można podać godzinę, o której zacząć robić zdjęcia</small>
+	    </div>
+	    <div class="form-group">
+		<label for="stop_photo">Stop automat photo (HH:MM)</label>
+		<input type="time" name="stop_photo" class="form-control" placeholder="stop_photo" value="{{form.stop_photo}}">
+		<small class="help-block">W nocy zdjęć nie robimy, więc tu trzeba podać godzinę zakończenia</small>
+	    </div>
+	    <div class="form-group">
+		<label for="step_photo">Co ile minut robić zdjęcia</label>
+		<select name="step_photo">
+		    <option value="1" {% if form.step_photo == "1" %} selected {% endif %}>1 minuta</option>
+		    <option value="2" {% if form.step_photo == "2" %} selected {% endif %}>2 minuty</option>
+		    <option value="5" {% if form.step_photo == "5" %} selected {% endif %}>5 minut</option>
+		    <option value="10" {% if form.step_photo == "10" %} selected {% endif %}>10 minut</option>
+		    <option value="30" {% if form.step_photo == "30" %} selected {% endif %}>30 minut</option>
+		    <option value="60" {% if form.step_photo == "60" %} selected {% endif %}>60 minut</option>
+		</select>
+		<small class="help-block">Uwaga: zdjęcia nadpisują się każdego dnia. Trzeba też uważać żeby nie zabrakło miejsca na dysku</small>
+	    </div>
+	    
+	    <button type="submit" class="btn btn-lg btn-danger">Zapisz</button>
+	</form>
+	
+
+    </div>
+    
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+<script src="{{url_for('static', filename='info_system.js')}}"></script>
+{% endblock %}

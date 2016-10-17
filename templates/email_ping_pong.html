@@ -1,0 +1,67 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Email{% endblock %}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    
+    <h1>Ustawienia email - Ping / Pong</h1>
+    <div class="jumbotron">
+	<form method="POST">
+
+	    <div class="form-group">
+		<label for="email_smtp_accept_all">Czy akceptować wszystkich nadawców</label>
+		<select name="email_smtp_accept_all">
+		    <option value="False" {% if form.email_smtp_accept_all == "False" %} selected {% endif %}>NIE</option>
+		    <option value="True" {% if form.email_smtp_accept_all == "True" %} selected {% endif %}>TAK</option>
+		</select>
+	    </div>
+
+	    <div class="form-group">
+		<label for="email_smtp_accept">Adresy email nadawców, które akceptuje</label>
+		<input type="text" class="form-control" name="email_smtp_accept" placeholder="smtp_accept" value="{{form.email_smtp_accept}}">
+		<small class="help-block">Maile podawać po przecinkach. Uwaga! Jeżeli zaznaczone pole TAK w "Akceptuje wszystich nadawców", to te pole będzie ignorowane</small>
+	    </div>
+	    
+	    <div class="form-group">
+		<label for="email_subject">Temat maila, po otrzymaniu którego będą wysyłane zdjęcia</label>
+		<input type="text" class="form-control" name="email_subject" placeholder="email_subject" value="{{form.email_subject}}">
+		<small class="help-block">
+		    <ul>
+			<li>{{form.email_subject}} - domyślna ilość zdjęć, czyli {{form.email_subject}},{{form.photo_default_length}},{{form.photo_default_offset}} </li>
+			<li>{{form.email_subject}},1,1 - wysyła najnowsza fotkę </li>
+			<li>{{form.email_subject}},4,6 - wysyła 4 fotki, co szóstą, czyli mamy po jednnym zdjęciu na godzinę </li>
+			<li>{{form.email_subject}},15,2 - wysyła 15 fotek, co drugą </li>
+		    </ul>
+		</small>
+	    </div>
+	    <div class="form-group">
+		<label for="photo_default_length">Domyślna ilość zdjęć </label>
+		<input type="number" class="form-control" name="photo_default_length" placeholder="photo_default_length" value="{{form.photo_default_length}}">
+		<small class="help-block">Wysyłając email bez parametrów dostaniesz ilość zdjęć, którą zdefiniujesz w tym polu</small>
+	    </div>
+	    <div class="form-group">
+		<label for="photo_default_offset">Domyślna ilość zdjęć pomijana</label>
+		<input type="number" class="form-control" name="photo_default_offset" placeholder="photo_default_offset" value="{{form.photo_default_offset}}">
+		<small class="help-block">Wysyłając email bez parametrów ilość zdjęć do pominięcia</small>
+	    </div>
+	    
+	    <button type="submit" class="btn btn-lg btn-danger">Zapisz</button>
+	</form>
+	
+
+    </div>
+    
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+<script src="{{url_for('static', filename='info_system.js')}}"></script>
+{% endblock %}

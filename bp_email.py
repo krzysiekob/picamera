@@ -12,9 +12,9 @@ from lib.gmail import Gmail
 bp_email = Blueprint('bp_email', __name__, template_folder='templates')
 
 
-@bp_email.route("/email", methods=["GET", "POST"])
+@bp_email.route("/email/server", methods=["GET", "POST"])
 @login_required
-def edit():
+def edit_server():
     try:
         name = 'email'
         settings = Settings()
@@ -42,10 +42,33 @@ def edit():
             gmail = Gmail()
             check_connect = gmail.check_connect()
             
-        return render_template("email.html",
+        return render_template("email_server.html",
                                form=settings_data,
                                form_info=form_info,
                                check_connect=check_connect)
+
+    except TemplateNotFound:
+        abort(404)
+
+@bp_email.route("/email/<string:type>", methods=["GET", "POST"])
+@login_required
+def edit(type):
+    try:
+        name = 'email'
+        settings = Settings()
+        settings_data = settings.get(name)
+        form_info = ''
+        if request.method == 'POST':
+            if settings.set_form(form=request.form,
+                                 section_name=name) is True:
+                form_info = "OK"
+                settings_data = settings.get(name)
+            else:
+                form_info = "ERROR"
+            
+        return render_template("email_" + type + ".html",
+                               form=settings_data,
+                               form_info=form_info)
 
     except TemplateNotFound:
         abort(404)

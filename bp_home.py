@@ -40,7 +40,7 @@ def edit():
             else:
                 form_info = "ERROR"
                 
-        
+
         image = 'static/test.jpg'
         if request.method == 'POST':
             p = Photo(path=None)
@@ -59,7 +59,6 @@ def edit():
 
     except TemplateNotFound:
         abort(404)
-
 
 @bp_home.route("/", methods=["GET"])
 @login_required
