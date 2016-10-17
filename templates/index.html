@@ -1,5 +1,5 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}Index{% endblock %}
+{% block title %}ReefNet{% endblock %}
 
 {% block navbar %}
   {% include 'navbar.html' %}
@@ -10,6 +10,81 @@
 <div class="container">
 
     <div class="row">
+
+	<div class="col-lg-6">
+	    <div class="panel panel-danger">
+		<div class="panel-heading">
+		    Wizard, email ping - pong
+		</div>
+		<div class="panel-body">
+		    <h4>1. <a href="{{url_for('bp_email.edit_server')}}">Ustawienia email - Serwer smtp/imap <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		    <h4>2. <a href="{{url_for('bp_email.edit', type='cron')}}">Ustawienia zdjęć - cron <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		    <h4>3. <a href="{{url_for('bp_home.edit')}}">Podgląd <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		    <h4>4. <a href="{{url_for('bp_email.edit', type='ping_pong')}}">Ustawienia email - Ping Pong <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		</div>
+            </div>
+	</div>
+
+	<div class="col-lg-6">
+	    <div class="panel panel-warning">
+		<div class="panel-heading">
+		    Wizard, streaming YouTube, sterowanie przez email
+		</div>
+		<div class="panel-body">
+		    <h4>1. <a href="{{url_for('bp_email.edit_server')}}">Ustawienia email - Serwer smtp/imap <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		    <h4>2. <a href="{{url_for('bp_camera.edit', name='youtube')}}">Konfiguracja dostepu YouTube <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		    <h4>3. <a href="{{url_for('bp_email.edit', type='youtube')}}">Ustawienia email - YouTube <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		</div>
+            </div>
+	</div>
+
+    </div>
+
+    <div class="row">
+	
+	<div class="col-lg-6">
+	    <div class="panel panel-success">
+		<div class="panel-heading">
+		    Wizard, auto-upload Flickr
+		</div>
+		<div class="panel-body">
+		    <h4>1. <a href="{{url_for('bp_email.edit', type='cron')}}">Ustawienia zdjęć - cron <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		    <h4>2. <a href="{{url_for('bp_home.edit')}}">Podgląd <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		    <h4>3. <a href="{{url_for('bp_flickr.api')}}">Flickr - ustawienia API <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		    <h4>4. <a href="{{url_for('bp_flickr.edit')}}">Flickr - ustawienia galerii <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		</div>
+            </div>
+	</div>
+
+	<div class="col-lg-6">
+	    <div class="panel panel-default">
+		<div class="panel-heading">
+		    Automatyzacja
+		</div>
+		<div class="panel-body">
+		    <h4>1. <a href="{{url_for('bp_cron.edit')}}">Cron <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		</div>
+            </div>
+	</div>
+	
+    </div>
+    
+    <div class="row">
+	
+	<div class="col-lg-6">
+	    <div class="panel panel-default">
+		<div class="panel-heading">
+		    Narzędzia
+		</div>
+		<div class="panel-body">
+		    <h4><a href="{{url_for('bp_photo.edit', type='color')}}">Ustawienia zdjęć - kolorystyka <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		    <h4><a href="{{url_for('bp_photo.edit', type='label')}}">Ustawienia zdjęć - etykieta <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		    <h4><a href="{{url_for('bp_photo.edit', type='size')}}">Ustawienia zdjęć - rozmiar/rotacja <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		    <h4><a href="{{url_for('bp_gallery.edit')}}">Galeria <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a></h4>
+		</div>
+            </div>
+	</div>			
+
 	
 	<div class="col-lg-6">
 	    <div class="panel panel-default">
@@ -20,8 +95,11 @@
 		    <div id="placeholder" style="height:250px;width:450px;"></div>
 		</div>
             </div>
-	</div>	
-    </div>    
+	</div>
+
+	
+    </div>
+
 
     	
 </div>

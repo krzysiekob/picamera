@@ -1,5 +1,5 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}Email{% endblock %}
+{% block title %}Ustawienia email - YouTube{% endblock %}
 
 {% block navbar %}
   {% include 'navbar.html' %}
@@ -30,7 +30,7 @@
 	    </div>
 	    
 	    <div class="form-group">
-		<label for="height_photo">Temat email dla streaming YouTube</label>
+		<label for="height_photo">Prefix tematu email dla streaming YouTube</label>
 		<input type="text" name="email_subject_streaming" class="form-control" placeholder="Temat email streaming" value="{{form.email_subject_streaming}}">
 		<small class="help-block">np: {{form.email_subject_streaming}},yt,start - startuje transmisje dla odtwarzacza YouTube</small>
 		<small class="help-block">np: {{form.email_subject_streaming}},yt,stop - zatrzymuje transmisje dla odtwarzacza YouTube</small>

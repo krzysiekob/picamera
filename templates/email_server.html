@@ -1,5 +1,5 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}Email{% endblock %}
+{% block title %}Ustawienia email - serwer smtp/imap{% endblock %}
 
 {% block navbar %}
   {% include 'navbar.html' %}
@@ -12,7 +12,7 @@
 
     {% if (check_connect) %}
     <div class="alert alert-success">
-	<strong>Success!</strong> Połączenie z serwerem Gmail OKav
+	<strong>Success!</strong> Połączenie z serwerem Gmail OK
     </div>
     {% else %}
     <div class="alert alert-danger">
@@ -20,7 +20,7 @@
     </div>
     {% endif %}
     
-    <h1>Ustawienia email - Serwer smtp/imap</h1>
+    <h1>Ustawienia email - serwer smtp/imap</h1>
     <div class="jumbotron">
 	<form method="POST">
 

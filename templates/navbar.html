@@ -26,18 +26,19 @@
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ustawienia email<span class="caret"></span></a>
 		<ul class="dropdown-menu" role="menu">
 		    <li><a href="{{url_for('bp_email.edit_server')}}">Serwer smtp/imap</a></li>
-		    <li><a href="{{url_for('bp_email.edit', type='ping_pong')}}">Ping / Pong</a></li>
+		    <li><a href="{{url_for('bp_email.edit', type='ping_pong')}}">Ping Pong</a></li>
 		    <li><a href="{{url_for('bp_email.edit', type='youtube')}}">YouTube</a></li>
 		</ul>
 	    </li>
+	    <li><a href="{{url_for('bp_home.edit')}}">Podgląd</a></li>	    
 	    <li><a href="{{url_for('bp_cron.edit')}}">Cron</a></li>	    
 	    <li><a href="{{url_for('bp_camera.edit', name='youtube')}}">Transmisja YouTube</a></li>
 	    <li><a href="{{url_for('bp_gallery.edit')}}">Galeria</a></li>
 	    <li class="dropdown">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Flickr<span class="caret"></span></a>
 		<ul class="dropdown-menu" role="menu">
+		    <li><a href="{{url_for('bp_flickr.api')}}">Ustawienia API</a></li>		    
 		    <li><a href="{{url_for('bp_flickr.edit')}}">Ustawienia galerii</a></li>
-		    <li><a href="{{url_for('bp_flickr.api')}}">Ustawienia API</a></li>
 		</ul>
 	    </li>
 	    <li><a href="{{url_for('bp_logs.edit')}}">Logi</a></li>

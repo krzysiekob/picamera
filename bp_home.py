@@ -20,27 +20,12 @@ def disk_usage(path):
     used = (st.f_blocks - st.f_bfree) * st.f_frsize
     return _ntuple_diskusage(total, used, free)
 
-
 bp_home = Blueprint('bp_home', __name__, template_folder='templates')
     
-@bp_home.route("/home", methods=["GET", "POST"])
+@bp_home.route("/home", methods=["GET"])
 @login_required
 def edit():
     try:
-        name = 'email'
-        settings = Settings()
-        settings_data = settings.get(name)
-                
-        form_info = ""
-        if request.method == 'POST':
-            if settings.set_form(form=request.form,
-                                 section_name=name) is True:
-                form_info = "OK"
-                settings_data = settings.get(name)
-            else:
-                form_info = "ERROR"
-                
-
         image = 'static/test.jpg'
         if request.method == 'POST':
             p = Photo(path=None)
@@ -55,7 +40,7 @@ def edit():
         
         return render_template("home.html",
                                image=image,
-                               date_created=date_created, form = settings_data)
+                               date_created=date_created)
 
     except TemplateNotFound:
         abort(404)
