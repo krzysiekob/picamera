@@ -27,9 +27,8 @@ bp_home = Blueprint('bp_home', __name__, template_folder='templates')
 def edit():
     try:
         image = 'static/test.jpg'
-        if request.method == 'POST':
-            p = Photo(path=None)
-            p.create_image(image)
+        p = Photo(path=None)
+        p.create_image(image)
 
         date_created = ''
         try:

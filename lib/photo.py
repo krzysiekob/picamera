@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import gevent
-# test
-#import picamera
+import picamera
 from lib.settings import Settings
 from datetime import datetime
 from gevent import subprocess
 from PIL import Image
 import os
 import logging
-# test
-#from picamera import Color
+from picamera import Color
 from email.utils import formatdate
 from lib.flickr import Flickr
 
@@ -51,7 +49,7 @@ class Photo:
         self.photo_meter_mode = s['photo_meter_mode']
         self.photo_awb_mode = s['photo_awb_mode']
         self.photo_image_effect = s['photo_image_effect']
-        #self.photo_annotate_background = Color(s['photo_annotate_background'])
+        self.photo_annotate_background = Color(s['photo_annotate_background'])
         self.photo_annotate_text = s['photo_annotate_text']
         if (s['photo_annotate_add_date'] == '1'):
             self.photo_annotate_text = '%s %s' % (self.photo_annotate_text,formatdate(localtime=True))

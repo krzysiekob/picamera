@@ -26,7 +26,7 @@ def edit(type):
             else:
                 form_info = "ERROR"
 
-        return render_template("photo_" + type + ".html", form = settings_data)
+        return render_template("photo_" + type + ".html", form = settings_data, form_info=form_info)
 
     except TemplateNotFound:
         abort(404)
