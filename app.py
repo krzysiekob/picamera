@@ -23,7 +23,7 @@ import gevent
 from gevent.wsgi import WSGIServer
 import flask.ext.login as flask_login
 from lib.users import User
-
+from lib.settings import Settings
 
 loggingFormatter = logging.Formatter(
     'pi camera  %(asctime)s %(levelname)s %(name)s %(message)s')
@@ -51,6 +51,10 @@ app.register_blueprint(bp_logs)
 app.register_blueprint(bp_server_send_event)
 app.register_blueprint(bp_flickr)
 app.register_blueprint(bp_info_system)
+
+if __name__ == "__main__":
+    s = Settings()
+    s.setupDB()
 
 gevent.spawn(Gmail().run)
 gevent.spawn(Photo().run)

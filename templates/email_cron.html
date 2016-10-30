@@ -9,10 +9,25 @@
 {% block content %}
 
 <div class="container">
-    
+
+    {% if form.is_power_photo == "0" %}
+    <div class="alert alert-danger">
+	<strong>Uwaga!</strong> Automat do generowania zdjęć wyłączony
+    </div>    
+  {% endif %}
+
+  
     <h1>Ustawienia zdjęć - cron</h1>
     <div class="jumbotron">
 	<form method="POST">
+
+	    <div class="form-group">
+		<label for="is_power_photo">Czy włączyć automat do generowania zdjęć ? </label>
+		<select name="is_power_photo">
+		    <option value="1" {% if form.is_power_photo == "1" %} selected {% endif %}>Tak</option>
+		    <option value="0" {% if form.is_power_photo == "0" %} selected {% endif %}>Nie</option>
+		</select>
+	    </div>
 
 	    <div class="form-group">
 		<label for="start_photo">Start automat photo (HH:MM)</label>

@@ -5,12 +5,6 @@ import os
 import sys
 
 
-'''
-sudo aptitude install sqlite3
-from lib.lite import Lite
-l = Lite()
-l.setupDB()
-'''
 class Settings:
 
     def __init__(self):
@@ -35,13 +29,23 @@ class Settings:
     def set_params(self, section_name, option, value):
         self.update(section_name, option, value.encode('ascii', 'ignore'))
         return True
-    
+
+    def get_params(self, params):
+        sql = 'select value from settings where name=? and option=?';
+        ret = {}
+        for row in self._fetch(sql=sql, params=(params[0], params[1])):
+            ret[params[0]+'__'+params[1]] = row[0]
+        return ret
+        
     def insert(self, params):
-        sql = 'insert into settings (name, option, value) values (?, ?, ?)'
-        print params
-        self._exc(sql, params)
+        if (len(self.get_params(params)) == 0):
+            print "insert"
+            print params
+            sql = 'insert into settings (name, option, value) values (?, ?, ?)'
+            self._exc(sql, params)
         
     def setupDB(self):
+        print "setupDB"
         sql = 'create table if not exists settings (name text, option text, value text)'
         self._exc(sql)
         self.default_insert()
@@ -93,7 +97,8 @@ class Settings:
 
     def default_insert(self):
         self.insert(('user', 'login', 'admin'))
-        self.insert(('user', 'password', '$pbkdf2-sha256$1000$pBRCCGGsdc65lxLCWOs9xw$ZY0Z1I/lUqxMsz4N1Dd5cC/RlPZ8ClXftHb2eQhCYOw'))        
+        self.insert(('user', 'password', '$pbkdf2-sha256$1000$pBRCCGGsdc65lxLCWOs9xw$ZY0Z1I/lUqxMsz4N1Dd5cC/RlPZ8ClXftHb2eQhCYOw'))
+        self.insert(('cron', 'is_power_cron', '1'))
         self.insert(('cron', 'email', ''))
         self.insert(('cron', 'subject1', ''))
         self.insert(('cron', 'subject2', ''))
@@ -125,6 +130,7 @@ class Settings:
         self.insert(('cron', 'time13', ''))
         self.insert(('cron', 'time14', ''))
         self.insert(('cron', 'time15', ''))
+        self.insert(('email', 'is_power_gmail', '1'))
         self.insert(('email', 'gmail_user', 'foo@gmail.com'))
         self.insert(('email', 'gmail_pwd', 'password'))
         self.insert(('email', 'gmail_is_connect', '0'))
@@ -141,6 +147,7 @@ class Settings:
         self.insert(('email', 'path_files', 'static/photo'))
         self.insert(('email', 'photo_default_length', '1'))
         self.insert(('email', 'photo_default_offset', '1'))
+        self.insert(('email', 'is_power_photo', '1'))
         self.insert(('email', 'stop_photo', '22:00'))
         self.insert(('email', 'start_photo', '10:00'))
         self.insert(('email', 'step_photo', '10'))

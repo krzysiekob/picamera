@@ -109,9 +109,9 @@ class Flickr:
         try:
             res = urllib2.urlopen(url, timeout=self.timeout).read()
         except urllib2.HTTPError, e:
-            self.log.error(e.code)
+            self.log.error("Flickr Error 1: " + e.code)
         except urllib2.URLError, e:
-            self.log.error(e.args)
+            self.log.error("Flickr Error 2: " + e.args)
         return json.loads(res)
 
     def _isGood(self, res):
@@ -179,7 +179,7 @@ class Flickr:
             else :
                 self._reportError(res)
         except:
-            self.log.error(str(sys.exc_info()))
+            self.log.error("Flickr Error 3: " + str(sys.exc_info()))
 
         return False
 
@@ -201,7 +201,7 @@ class Flickr:
             
         self.log.info("Uploading " + file + "...")
         if self.checkToken() is False:
-            self.log.error('Brak autoryzacji Flickr');
+            self.log.error('No authorization Flickr');
             return False
 
         success = False
@@ -232,11 +232,11 @@ class Flickr:
             else :
                 self.log.error("A problem occurred while attempting to upload the file: " + file)
                 try:
-                    self.log.error("Error: " + str(res.toxml()))
+                    self.log.error("Flickr Error 4: " + str(res.toxml()))
                 except:
-                    self.log.error("Error: " + str(res.toxml()))
+                    self.log.error("Flickr Error 5: " + str(res.toxml()))
         except:
-            self.log.error(str(sys.exc_info()))
+            self.log.error("Flickr Error 6: " + str(sys.exc_info()))
         return success
 
     def build_request(self, theurl, fields, files, txheaders=None):

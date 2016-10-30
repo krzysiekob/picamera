@@ -27,6 +27,7 @@ class Gmail():
     def __init__(self):
         settings = Settings()
         s = settings.get("email")
+        self.is_power_gmail = int(s["is_power_gmail"])
         self.gmail_user = s["gmail_user"]
         self.gmail_pwd = s["gmail_pwd"]
         self.gmail_is_connect = s["gmail_is_connect"]
@@ -265,6 +266,11 @@ class Gmail():
     
     def run(self,):
         while True:
+            if (self.is_power_gmail == 0):
+                self.log.debug("Email is not power")
+                self.__init__()
+                gevent.sleep(5)                
+                continue
             if (self.gmail_is_connect == '0'):
                 self.log.debug("Brak skonfigurowanego email")
                 self.__init__()
@@ -275,7 +281,7 @@ class Gmail():
                 try:
                     rv, data = M.login(self.gmail_user, self.gmail_pwd)
                 except imaplib.IMAP4.error:
-                    self.log.error("Blad logowania!!! ")
+                    self.log.error("1 Login failed!!! ")
                     gevent.sleep(300)
                     self.__init__()
                     continue
@@ -295,12 +301,17 @@ class Gmail():
                 self.__init__()
                 gevent.sleep(1)
             except imaplib.IMAP4.error:
-                self.log.error("Login failed!!! ")
+                self.log.error("2 Login failed!!! ")
             except Exception as e:
-                self.log.error(str(e))
+                self.log.error("Gmail Error 1" + str(e))
 
     def cron(self,):
         while True:
+            if (self.settings_cron["is_power_cron"] == "0"):
+                self.log.debug("Cron is not power")
+                self.__init__()
+                gevent.sleep(5)
+                continue
             try:
                 to = self.settings_cron['email'].split(',')
                 for i in range(1, 16):
@@ -313,4 +324,4 @@ class Gmail():
                 self.__init__()
                 gevent.sleep(60)
             except Exception as e:
-                self.log.error(str(e))
+                self.log.error("Gmail Error 2" + str(e))

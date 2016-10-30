@@ -23,7 +23,9 @@ class Photo:
         else:
             self.path = path
 
+        self.is_power_photo = 0
         try:
+            self.is_power_photo = int(s['is_power_photo'])
             self.start_photo = int(s['start_photo'].replace(':', ''))
             self.stop_photo = int(s['stop_photo'].replace(':', ''))
             self.step_photo = int(s['step_photo'])
@@ -124,7 +126,7 @@ class Photo:
         sleep = 60
         while True:
             try:
-                if int(datetime.now().strftime('%M')) % self.step_photo == 0 and int(datetime.now().strftime('%H%M')) >= self.start_photo and int(datetime.now().strftime('%H%M')) <= self.stop_photo:
+                if self.is_power_photo == 1 and int(datetime.now().strftime('%M')) % self.step_photo == 0 and int(datetime.now().strftime('%H%M')) >= self.start_photo and int(datetime.now().strftime('%H%M')) <= self.stop_photo:
                     try:
                         subprocess.check_output(["pidof", 'raspivid'])
                         sleep = 1
@@ -135,4 +137,4 @@ class Photo:
                 self.__init__()
                 gevent.sleep(sleep)
             except Exception as e:
-                self.log.error(str(e))
+                self.log.error("Photo Error 1" + str(e))

@@ -6,7 +6,6 @@ from lib.settings import Settings
 from flask import request
 from flask.ext.login import login_required
 
-
 bp_camera = Blueprint('bp_camera', __name__, template_folder='templates')
 
 
@@ -31,4 +30,3 @@ def edit(name='youtube'):
 
     except TemplateNotFound:
         abort(404)
-

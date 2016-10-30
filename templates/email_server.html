@@ -19,10 +19,24 @@
 	<strong>Uwaga!</strong> Brak połączenia z serwerem Gmail. Sprawdź email i hasło.
     </div>
     {% endif %}
+
+    {% if form.is_power_gmail == "0" %}
+    <div class="alert alert-danger">
+	<strong>Uwaga!</strong> Odbieranie i wysyłanie email wyłączone
+    </div>    
+    {% endif %}
     
     <h1>Ustawienia email - serwer smtp/imap</h1>
     <div class="jumbotron">
 	<form method="POST">
+
+	    <div class="form-group">
+		<label for="is_power_gmail">Czy włączyć połączenie z serwerem smtp/imap ? </label>
+		<select name="is_power_gmail">
+		    <option value="1" {% if form.is_power_gmail == "1" %} selected {% endif %}>Tak</option>
+		    <option value="0" {% if form.is_power_gmail == "0" %} selected {% endif %}>Nie</option>
+		</select>
+	    </div>
 
 	    <div class="form-group">
 		<label for="gmail_user">Email</label>
@@ -51,7 +65,7 @@
 		<input type="number" class="form-control" name="gmail_smtp_max_size" placeholder="smtp_max_size" value="{{form.gmail_smtp_max_size}}">
 		<small class="help-block">Wartość w bajtach, gmail akceptuje 25 MB</small>
 	    </div>
-	    
+
 	    <button type="submit" class="btn btn-lg btn-danger">Zapisz</button>
 	</form>
 	
