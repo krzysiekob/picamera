@@ -14,7 +14,3 @@ echo "Start PI Camera"
 
 cd /home/pi/picamera; su pi -s /usr/bin/python app.py &
 
-
-3.
-cd /home/pi/picamera; su pi -s /usr/bin/python app.py &
-
