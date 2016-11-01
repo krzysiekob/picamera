@@ -302,8 +302,10 @@ class Gmail():
                 gevent.sleep(1)
             except imaplib.IMAP4.error:
                 self.log.error("2 Login failed!!! ")
+                gevent.sleep(300)
             except Exception as e:
                 self.log.error("Gmail Error 1" + str(e))
+                gevent.sleep(300)
 
     def cron(self,):
         while True:
@@ -325,3 +327,4 @@ class Gmail():
                 gevent.sleep(60)
             except Exception as e:
                 self.log.error("Gmail Error 2" + str(e))
+                gevent.sleep(300)

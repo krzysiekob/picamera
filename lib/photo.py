@@ -138,3 +138,4 @@ class Photo:
                 gevent.sleep(sleep)
             except Exception as e:
                 self.log.error("Photo Error 1" + str(e))
+                gevent.sleep(300)
