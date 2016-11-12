@@ -6,5 +6,5 @@ git pull
 v2=`git describe --tags`
 if [ "$v1" != "$v2" ]; then
     pkill -f app.py
-    python app.py & > /dev/null
+    ./start.sh & > /dev/null
 fi

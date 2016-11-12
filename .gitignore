@@ -4,3 +4,4 @@ logs/*
 static/photo/*
 static/test.jpg
 lib/settings.lite
+venv

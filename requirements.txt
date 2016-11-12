@@ -1,0 +1,10 @@
+Flask==0.10.1
+flask-bootstrap==3.3.5.7
+requests==2.11.1
+flask-paginate==0.4.1
+flask-login==0.3.2
+passlib==1.6.5
+gevent==1.1.2
+Pillow==2.6.1
+flask-restful==0.3.5
+picamera==1.12
