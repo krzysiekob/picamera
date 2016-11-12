@@ -115,13 +115,18 @@ class Photo:
                 os.path.basename(path_photo)
             self.create_thumb(path_photo, path_to_thumb)
 
-            gevent.spawn(self.flickr, path_photo)
+            # TODO przeniesc w inne miejsce
+            # gevent.spawn(self.flickr, path_photo)
 
     def flickr(self, path_photo):
         flickr = Flickr()
         if flickr.isPower():
+            self.log.debug("photo: flickr upload start: ", path_photo)
             flickr.uploadFile(path_photo)
-                
+            self.log.debug("photo: flickr upload end: ", path_photo)
+        else:
+            self.log.debug("flickr off: ", path_photo)
+
     def run(self,):
         sleep = 60
         while True:
