@@ -21,4 +21,6 @@ fi
 echo "Start PI Camera"
 su pi -s /home/pi/picamera/start.sh &
 
+ifup wlan0
+
 exit 0
